@@ -2,7 +2,7 @@ name: Publish Playwright Report
 
 on:
   workflow_run:
-    workflows: ["rodando com o reporter"]   # <<< NOME EXATO do workflow de testes
+    workflows: ["playwright"]            # ← NOME EXATO do workflow acima
     branches: [main, master]
     types: [completed]
 
@@ -27,7 +27,7 @@ jobs:
       - name: Download HTML report artifact from CI
         uses: actions/download-artifact@v4
         with:
-          name: playwright-report
+          name: playwright-report        
           path: ./playwright-report
           run-id: ${{ github.event.workflow_run.id }}
           repository: ${{ github.repository }}
@@ -39,7 +39,7 @@ jobs:
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: ./playwright-report
+          path: ./playwright-report      
 
       - name: Deploy to Pages
         id: deployment
